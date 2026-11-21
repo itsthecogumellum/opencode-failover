@@ -1,4 +1,4 @@
-﻿# opencode-failover
+# opencode-failover
 
 A local OpenAI-compatible gateway that keeps your coding session alive when a
 model provider hits a rate limit, runs out of quota, loses auth or goes down.
