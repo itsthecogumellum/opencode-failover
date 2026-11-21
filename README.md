@@ -1,4 +1,4 @@
-# opencode-failover
+﻿# opencode-failover
 
 A local OpenAI-compatible gateway that keeps your coding session alive when a
 model provider hits a rate limit, runs out of quota, loses auth or goes down.
@@ -59,10 +59,10 @@ The installer:
   "timeoutMs": 120000,
   "chain": [
     {
-      "id": "deepseek-chat",
+      "id": "deepseek-flash",
       "label": "DeepSeek Chat",
       "baseURL": "https://api.deepseek.com/v1",
-      "model": "deepseek-chat",
+      "model": "deepseek-flash",
       "apiKeyEnv": "DEEPSEEK_API_KEY"
     },
     {
@@ -171,7 +171,7 @@ Local runtimes need no key:
 - No bypass of a regional block or a ban.
 
 Those are evasion of the provider's controls. This tool solves the normal
-problem — one provider is temporarily unavailable and you have another one —
+problem â€” one provider is temporarily unavailable and you have another one â€”
 by moving the request. If a provider offers no quota you own, the honest answer
 is another provider, a paid plan, or a local model.
 
