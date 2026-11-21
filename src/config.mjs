@@ -24,6 +24,8 @@ export async function loadConfig(path = CONFIG_PATH) {
     }
     throw err;
   }
+  if (raw.charCodeAt(0) === 0xfeff) raw = raw.slice(1);
+
   let cfg;
   try {
     cfg = JSON.parse(raw);

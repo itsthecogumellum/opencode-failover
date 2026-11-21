@@ -1,4 +1,8 @@
 import http from "node:http";
+import { mkdtemp, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { loadConfig } from "../src/config.mjs";
 import { createGateway } from "../src/gateway.mjs";
 
 function assert(condition, message) {
@@ -147,7 +151,19 @@ assert(exhausted.status === 503, "exhausted chain returns 503");
 const exhaustedJson = await exhausted.json();
 assert(exhaustedJson.error.type === "failover_exhausted", "error type is failover_exhausted");
 
-console.log("7 checks passed");
+// 8. A UTF-8 BOM from Notepad does not break config loading.
+const dir = await mkdtemp(join(tmpdir(), "failover-bom-"));
+const bomPath = join(dir, "gateway.json");
+await writeFile(
+  bomPath,
+  `\ufeff${JSON.stringify({
+    chain: [{ id: "x", baseURL: "http://127.0.0.1:1/", model: "m", apiKey: "k" }],
+  })}`,
+);
+const loaded = await loadConfig(bomPath);
+assert(loaded.chain[0].baseURL === "http://127.0.0.1:1", "BOM tolerated, trailing slash stripped");
+
+console.log("8 checks passed");
 gateway.close();
 all.close();
 rateLimited.close();
