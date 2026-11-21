@@ -1,0 +1,18 @@
+{
+  "name": "opencode-failover",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Local OpenAI-compatible gateway that fails over across the model providers you already own. Health checks, cooldowns, streaming, one-command install.",
+  "type": "module",
+  "bin": {
+    "failover": "./src/cli.mjs"
+  },
+  "scripts": {
+    "start": "node src/cli.mjs serve",
+    "test": "node test/smoke.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
